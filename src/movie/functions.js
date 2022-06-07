@@ -3,7 +3,7 @@ const Movie = require("./table");
 exports.addMovie = async (movieObj) => {
     try {
         const newMovie = await Movie.create(movieObj);
-        console.log(`Succesfully added ${newMovie.dataValues.title} to the database`);
+        console.log(`Succesfully added ${newMovie.dataValues.title} to the movie database`);
     } catch (error) {
         console.log(error)
     }
@@ -39,7 +39,7 @@ exports.deleteMovie = async (filterObj) => {
     try {
         const response = await Movie.destroy({ where: filterObj });
         if (response > 0) {
-            console.log("Succesfully deleted");
+            console.log(`Succesfully deleted ${response.dataValues.title}`);
         } else {
             console.log("Something went wrong")
         }

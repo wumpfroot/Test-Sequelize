@@ -6,7 +6,7 @@ const { addShow, listShows, updateShow, deleteShow } = require("./tv/functions")
 const app = async (yargsObj) => {
     try {
         await sequelize.sync();
-        if (yargs.movie) {
+        if (yargsObj.movie) {
             if (yargsObj.add) {
                 //take movie key value pairs from yargsObj, send them to an add function and return movie
                 await addMovie({title: yargsObj.title, actor: yargsObj.actor});

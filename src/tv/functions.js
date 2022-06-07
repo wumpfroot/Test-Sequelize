@@ -2,8 +2,8 @@ const Tv = require("./table");
 
 exports.addShow = async (tvObj) => {
     try {
-        const newShows = await Movie.create(tvObj);
-        console.log(`Succesfully added ${newShows.dataValues.title} to the database`);
+        const newShows = await Tv.create(tvObj);
+        console.log(`Succesfully added ${newShows.dataValues.title} to the TV database`);
     } catch (error) {
         console.log(error)
     }
@@ -39,7 +39,7 @@ exports.deleteShow = async (filterObj) => {
     try {
         const response = await Tv.destroy({ where: filterObj });
         if (response > 0) {
-            console.log(`${response.dataValues.title}was succesfully deleted`);
+            console.log("Tv show was succesfully deleted");
         } else {
             console.log("Something went wrong")
         }
