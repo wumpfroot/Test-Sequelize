@@ -7,15 +7,13 @@ const Director = require("./director/table")
 
 const app = async (yargsObj) => {
     try {
-        Director.hasOne(Movie, {
-            foreignKey: "directorID"
-        });
-        Movie.belongsTo(Director);
+        Movie.hasOne(Director);
+        Director.belongsTo(Movie);
         await sequelize.sync({ alter: true });
         if (yargsObj.movie) {
             if (yargsObj.add) {
                 //take movie key value pairs from yargsObj, send them to an add function and return movie
-                await addMovie({title: yargsObj.title, actor: yargsObj.actor, director: yargsObj.directorName});
+                await addMovie({title: yargsObj.title, actor: yargsObj.actor, directorName: yargsObj.directorName});
             } else if (yargsObj.list) {
                 //list all movies in database
                 await listMovies();
