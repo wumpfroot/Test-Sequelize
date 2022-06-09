@@ -13,10 +13,11 @@ exports.listMovies = async () => {
     try {
         //find all movies
         const movies = await Movie.findAll();
-        // for (let i = 0; i < movies.length; i++) {
-        //     console.log(movies[i].dataValues.title, movies[i].dataValues.actor);
-        // }
-        console.log(movies);
+        console.log("\n Movies ⬇️ \n")
+        for (let i = 0; i < movies.length; i++) {
+            console.log(movies[i].dataValues.title, movies[i].dataValues.actor);
+        }
+        // console.log(movies);
     } catch (error) {
         console.log(error)
     }
