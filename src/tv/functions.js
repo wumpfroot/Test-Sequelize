@@ -15,7 +15,8 @@ exports.listShows = async () => {
         const shows = await Tv.findAll();
         console.log("\n TV Shows ⬇️ \n")
         for (let i = 0; i < shows.length; i++) {
-            console.log(shows[i].dataValues.title, shows[i].dataValues.actor);
+            console.log(
+                "SERIES:",shows[i].dataValues.title,"\nACTOR:", shows[i].dataValues.actor);
         }
         
     } catch (error) {

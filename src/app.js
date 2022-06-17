@@ -2,18 +2,19 @@ const yargs = require("yargs");
 const { sequelize } = require("./db/connection");
 const { addMovie, listMovies, updateMovie, deleteMovie } = require("./movie/functions");
 const { addShow, listShows, updateShow, deleteShow } = require("./tv/functions");
+const { addDirector } = require("./director/functions");
 const Movie = require("./movie/table");
-const Director = require("./director/table")
+const Director = require("./director/table");
 
 const app = async (yargsObj) => {
     try {
-        Movie.hasOne(Director);
-        Director.belongsTo(Movie);
+        Director.hasOne(Movie);
+        Movie.belongsTo(Director);
         await sequelize.sync({ alter: true });
         if (yargsObj.movie) {
             if (yargsObj.add) {
                 //take movie key value pairs from yargsObj, send them to an add function and return movie
-                await addMovie({title: yargsObj.title, actor: yargsObj.actor, directorName: yargsObj.directorName});
+                await addMovie({title: yargsObj.title, actor: yargsObj.actor});
             } else if (yargsObj.list) {
                 //list all movies in database
                 await listMovies();
@@ -26,6 +27,11 @@ const app = async (yargsObj) => {
             } else {
                 console.log("Incorrect command")
             }
+    } else if (yargsObj.director) {
+        if (yargsObj.add) {
+            //add director to the database
+            await addDirector( {director: yargsObj.director} );
+        }
     } else if (yargsObj.tv) {
         if (yargsObj.add) {
             //take movie key value pairs from yargsObj, send them to an add function and return movie
